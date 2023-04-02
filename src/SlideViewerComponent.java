@@ -49,6 +49,7 @@ public class SlideViewerComponent extends JComponent implements Observer
 		return new Dimension(Slide.WIDTH, Slide.HEIGHT);
 	}
 
+	//This was the original function named update, I have renamed it to update2 because update is already used by the observer
 	public void update2(Slide data) {
 		if (data == null) {
 			repaint();
@@ -71,7 +72,7 @@ public class SlideViewerComponent extends JComponent implements Observer
 		g.drawString("Slide " + (1 + slideMover.getSlideNumber()) + " of " +
                  slideMover.getPresentation().getSize(), XPOS, YPOS);
 		Rectangle area = new Rectangle(0, YPOS, getWidth(), (getHeight() - YPOS));
-		slide.draw(g, area, this);
+		slide.draw(g, area, this, slideMover.getPresentation().getTheme());
 	}
 
 	@Override

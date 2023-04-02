@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 
 
@@ -20,12 +21,14 @@ Deze class was voor te veel verantwoordelijk. Namelijk het zijn van een presenta
 public class Presentation {
 	private String showTitle; //The title of the presentation
 	private ArrayList<Slide> showList = null; //An ArrayList with slides
+	private Theme theme;
 	/*Het currentslidenumber wordt nu bijgehouden in SlideMover
 	/*private SlideViewerComponent slideViewComponent = null; //The view component of the slides*/
 
 	public Presentation() {
 		/*slideViewComponent = null;*/
 		clear();
+		this.theme = new Theme();
 	}
 
 	public int getSize() {
@@ -69,5 +72,10 @@ public class Presentation {
 
 	public void exit(int n) {
 		System.exit(n);
+	}
+
+	public Theme getTheme()
+	{
+		return this.theme;
 	}
 }

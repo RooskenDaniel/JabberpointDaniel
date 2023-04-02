@@ -24,13 +24,11 @@ public class JabberPoint {
 	/** The main program */
 	public static void main(String[] argv)
 	{
-		
-		Style.createStyles();
 		// Ik heb de presentation weggehaald, die kan SlideViewerFrame net zo goed zelf maken
 		SlideViewerFrame slideViewerFrame = new SlideViewerFrame(JABVERSION);
 		try {
 			if (argv.length == 0) { //a demo presentation
-				Accessor.getDemoAccessor().loadFile(slideViewerFrame.getPresentation(), ""); //***Deze class is veel te groot
+				Accessor.getDemoAccessor().loadFile(slideViewerFrame.getPresentation(), "");
 			} else {
 				new XMLAccessor().loadFile(slideViewerFrame.getPresentation(), argv[0]);
 			}
