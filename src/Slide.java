@@ -18,10 +18,30 @@ public class Slide {
 	public final static int HEIGHT = 800;
 	protected String title; //The title is kept separately
 	protected Vector<SlideItem> items; //The SlideItems are kept in a vector
+	private int number; // Voeg een veld toe voor het dia-nummer
+	private Presentation presentation; // Voeg een veld toe voor de presentatie
+
 
 	public Slide() {
 		items = new Vector<SlideItem>();
 	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	public Presentation getPresentation() {
+		return presentation;
+	}
+
+	public void setPresentation(Presentation presentation) {
+		this.presentation = presentation;
+	}
+
 
 	//Add a SlideItem
 	public void append(SlideItem anItem) {

@@ -8,27 +8,12 @@ import java.util.Observer;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-
-/** <p>SlideViewerComponent is a graphical component that ca display Slides.</p>
- * @author Ian F. Darwin, ian@darwinsys.com, Gert Florijn, Sylvia Stuurman
- * @version 1.1 2002/12/17 Gert Florijn
- * @version 1.2 2003/11/19 Sylvia Stuurman
- * @version 1.3 2004/08/17 Sylvia Stuurman
- * @version 1.4 2007/07/16 Sylvia Stuurman
- * @version 1.5 2010/03/03 Sylvia Stuurman
- * @version 1.6 2014/05/16 Sylvia Stuurman
- */
-
-public class SlideViewerComponent extends JComponent implements Observer
-{
-		
-	private Slide slide; //The current slide
-	private Font labelFont = null; //The font for labels
-	private SlideMover slideMover = null; //The presentation
+public class SlideViewerComponent extends JComponent implements Observer {
+	private Slide slide; // The current slide
+	private Font labelFont = null; // The font for labels
 	private JFrame frame = null;
-	
+
 	private static final long serialVersionUID = 227L;
-	
 	private static final Color BGCOLOR = Color.white;
 	private static final Color COLOR = Color.black;
 	private static final String FONTNAME = "Dialog";
@@ -38,9 +23,7 @@ public class SlideViewerComponent extends JComponent implements Observer
 	private static final int YPOS = 20;
 
 	public SlideViewerComponent(SlideMover slideMover, JFrame frame) {
-		setBackground(BGCOLOR); 
-		this.slideMover = slideMover;
-		slideMover.addObserver(this);
+		setBackground(BGCOLOR);
 		labelFont = new Font(FONTNAME, FONTSTYLE, FONTHEIGHT);
 		this.frame = frame;
 	}
@@ -49,35 +32,37 @@ public class SlideViewerComponent extends JComponent implements Observer
 		return new Dimension(Slide.WIDTH, Slide.HEIGHT);
 	}
 
-	//This was the original function named update, I have renamed it to update2 because update is already used by the observer
-	public void update2(Slide data) {
+	// This method is called when the observed object is changed
+	public void update(Observable o, Object arg) {
+		if (o instanceof SlideMover) {
+			SlideMover slideMover = (SlideMover) o;
+			update2(slideMover.getPresentation().getSlideByNumber(slideMover.getSlideNumber()));
+			frame.setTitle(slideMover.getPresentation().getTitle());
+		}
+	}
+
+	// This was the original function named update, I have renamed it to update2
+	private void update2(Slide data) {
 		if (data == null) {
 			repaint();
 			return;
 		}
 		this.slide = data;
 		repaint();
-		frame.setTitle(slideMover.getPresentation().getTitle());
 	}
 
-//Draw the slide
+	// Draw the slide
 	public void paintComponent(Graphics g) {
 		g.setColor(BGCOLOR);
 		g.fillRect(0, 0, getSize().width, getSize().height);
-		if (slideMover.getSlideNumber() < 0 || slide == null) {
+		if (slide == null) {
 			return;
 		}
 		g.setFont(labelFont);
 		g.setColor(COLOR);
-		g.drawString("Slide " + (1 + slideMover.getSlideNumber()) + " of " +
-                 slideMover.getPresentation().getSize(), XPOS, YPOS);
+		g.drawString("Slide " + slide.getNumber() + " of " +
+				slide.getPresentation().getSize(), XPOS, YPOS);
 		Rectangle area = new Rectangle(0, YPOS, getWidth(), (getHeight() - YPOS));
-		slide.draw(g, area, this, slideMover.getPresentation().getTheme());
-	}
-
-	@Override
-	public void update(Observable o, Object arg)
-	{
-		update2(slideMover.getPresentation().getSlideByNumber(slideMover.getSlideNumber()));
+		slide.draw(g, area, this, slide.getPresentation().getTheme());
 	}
 }
