@@ -38,6 +38,8 @@ Er zijn meerdere activity diagrammen opgesteld. Namelijk een voor elke activitei
 
 ![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-16-02-56-image.png?raw=true)
 
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-16-03-04-image.png?raw=true)
+
 ![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-16-03-11-image.png?raw=true)
 
 ![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-16-03-19-image.png?raw=true)
@@ -46,7 +48,7 @@ Er zijn meerdere activity diagrammen opgesteld. Namelijk een voor elke activitei
 
 ![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-16-03-36-image.png?raw=true)
 
-![](file://C:\Users\daniel.roosken\AppData\Roaming\marktext\images\2024-04-18-16-03-36-image.png?msec=1713644044992)
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-21-19-51-48-image.png?raw=true)
 
 ### Class diagram
 
