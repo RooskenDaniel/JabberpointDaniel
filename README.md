@@ -28,7 +28,7 @@ Voor deel 1 moeten een drietal diagrammen aangeleverd worden. Dit zijn, volgens 
 
 In figuur *uc* vind men het use-case diagram.
 
-![](file://https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-15-56-57-image.png)
+![](file://https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-15-56-57-image.png?raw=true)
 
 ### Activity diagram
 
