@@ -54,7 +54,7 @@ Er zijn meerdere activity diagrammen opgesteld. Namelijk een voor elke activitei
 
 Voor deel 1 moest een schatting worden gemaakt van het class diagram. Deze valt te vinden in figuur pkg. Houd er rekening mee dat dit diagram incorrect is. Het is slecht een schatting van de student *voordat* de source code is bekeken.
 
-![](file://C:\Users\daniel.roosken\AppData\Roaming\marktext\images\2024-04-18-16-02-14-image.png?msec=1713644044993)
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-16-02-14-image.png?raw=true)
 
 ## Deel 2
 
@@ -115,9 +115,9 @@ Het `slideNumber` van de `presentation` wordt op `0` gezet.
 
 Dit was de `JabberPoint`class. Wat gelijk al opvalt is dat er erg veel in de main gebeurt, dit is een code smell. De main moet zo kort mogelijk zijn. Dit probleem zal worden opgelost door meer funties aan `JabberPoint` toe te voegen waarin ieder functie verantwoordelijk is voor een ding.
 
-![](file://C:\Users\daniel.roosken\AppData\Roaming\marktext\images\2024-04-18-16-13-08-image.png?msec=1713644044993)
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/Huidigesituatiemain.png?raw=true)
 
-*Huidige situatie*
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/refactormain.png?raw=true)
 
 Er zal nu verder verdiept worden, de classes die in `JabberPoint` worden aangeroepen worden ook beschreven. Dit wordt weer chronologisch gedaan, op volgerde waarin deze classes voorkomen in `JabberPoint`.
 
@@ -136,6 +136,10 @@ public static void createStyles() {
 ```
 
 Hier gebeurt iets heel raars. Er worden namelijk `styles` aangemaakt in de class `Style`. Een `Style` bevat dus zowel stijlelementen (kleur, lettertype etc.) als ook een verzameling `styles`. Om er voor te zorgen dat dit niet een *invinity* in elkaar *genest* zitten, is de verzameling `styles` op een statische manier gemaakt. Dit werkt welleswaar, maar is niet volgens *best practises*. Een class moet alleen doen wat een class moet doen. Een `style` moet dus alleen stijlelementen bijhouden. De verzameling `styles` moet ergens anders worden bijgehouden. Hiervoor ga ik een nieuwe class maken genaamd `Theme`. Mijn idee is dat een `style` de stijling van een component is, terwijl een `theme` de stijling van het het programma is. Ofwel een verzameling `styles`. Hiervoor gebruik ik het [Singleton pattern](https://refactoring.guru/design-patterns/singleton). Dit zorgt ervoor dat er slecht een instantie van `Theme` bestaat.
+
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/huidigesituatiestyle.png?raw/true)
+
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/stylegerefactord.png?raw=true)
 
 # Presentation
 
@@ -161,6 +165,10 @@ public class Presentation {
 
 Dit is hoe een `presentation` wordt aangemaakt in `JabberPoint`. `Presentation` is voor te veel dingen verantwoordelijk. Een `presentation` is in de essentie namelijk gewoon een verzameling `slides`. Zo zou het ook moeten zijn opgebouwd. Dingen als bijhouden op welke `slide` `presentation` is, is niet de verantwoordelijkheid van `presentation`. In de echte wereld zou dit worden gedaan door een projector. Daarom zal ik een class genaamde `Projector` toevoegen die zulke restinformatie over de `presentation` bijhoudt.
 
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/huidigesituatiepresentation.png?raw=true)
+
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/presentationgerefactord.png?raw=true)
+
 # SlideViewerFrame/SlideViewerComponent
 
 ```java
@@ -179,7 +187,11 @@ public class SlideViewerFrame extends JFrame {
     }
 ```
 
-Deze class maakt het `frame` waar alle grafische elementen van het programma zich in bevinden. Op zich is het meeste in deze class vrij simpel en hoeft niet verder gerefactord te worden. Het enige is dat er een `slideViewerComponent` wordt gemaakt, deze *heeft* een `presentation`, maar ook *heeft* een `presentation` een `slideViewerComponent`, zo ontstaat er dus een soort *circelverwijzing*. Dit wil ik oplossen door `slideViewComponent` uit `Presentation` te halen. `SlideViewerComponent` is namelijk de *bovenste* class van de twee, dus die zou een `presentation` moeten *hebben* en niet andersom. De comunicatie tussen beiden loopt dan via een *observer*. Helaas blijkt het heel lastig om een *observer* in een `JComponent` te bouwen. Dus komt hier een tussenclass tussen die de communicatie regelt. Deze class heet `Painter` omdat het de `repaint()` van `SlideViewerComponent` aanroept.
+Deze class maakt het `frame` waar alle grafische elementen van het programma zich in bevinden. Op zich is het meeste in deze class vrij simpel en hoeft niet verder gerefactord te worden. Het enige is dat er een `slideViewerComponent` wordt gemaakt, deze *heeft* een `presentation`, maar ook *heeft* een `presentation` een `slideViewerComponent`, zo ontstaat er dus een soort *circelverwijzing*. Dit wil ik oplossen door `slideViewComponent` uit `Presentation` te halen. `SlideViewerComponent` is namelijk de *bovenste* class van de twee, dus die zou een `presentation` moeten *hebben* en niet andersom. De comunicatie tussen beiden loopt dan via een [Observer](https://refactoring.guru/design-patterns/observer). Helaas blijkt het heel lastig om een *observer* in een `JComponent` te bouwen. Dus komt hier een tussenclass tussen die de communicatie regelt. Deze class heet `Painter` omdat het de `repaint()` van `SlideViewerComponent` aanroept.
+
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/huidigesituatie%20SlideViewerComponent.png?raw=true)
+
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/SlideviewerFramegerefactord.png?raw/true)
 
 # Acceser
 
@@ -199,11 +211,19 @@ Het is raar dat `Accessor.getDemoAccessor()` bestaat. `Accessor` is een abstract
 
 Hardcoden is een *code smell* omdat het de onderhoudbaarheid van de code negatief beïnvloed. Als iemand de `DemoPresentation` wil wijzigen, zou dat moeten kunnen zonder de code te wijzigen. Vandaar ga ik de gehardcode `DemoPresentation` in een *XML-bestand* zetten. Bijkomend voordeel is dat er dan niet meer twee implementaties van `Accessor` bestaan. Een *abstractie* is dus niet meer nodig. Dit versimpeld de code.
 
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/HuidigAccessor.png?raw=true)
+
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/gerefactordAccessor.png?raw=true)
+
 Dit waren de classes die in `JabberPoint` worden gebruikt. Er zijn nog meer classes die weer in *deze* classes worden gebruikt. Die zullen hier verder worden uitgelegd.
 
 # Menu
 
 Een aantal classes zijn verantwoordelijk voor het menu. Dit zijn `AboutBox`, `KeyController` en `MenuController`. Hierin staan twee problemen. Ten eerste is `MenuController` voor zowel de front-end als de back-end verantwoordelijk. Dit is maakt de onderhoudbaarheid lastig. Het is makkelijker als een frontenter en backenter allebei in een eigen bestand kunnen werken. Daarom wordt deze opgesplitst in `MenuLogic` en `MenuView`.
+
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/huidgigesituatiemenu.png?raw=true)
+
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/menugerefactord.png?raw=true)
 
 Verder is het in JabberPoint mogelijk te navigeren naar een slide die helemaal niet bestaat. Dan vertoond het programma vreemd gedrag. Tijdens refactoren is het niet de bedoeling functionaliteiten toe te voegen, maar dit is eerder het oplossen van een bug dan een functionaliteit. Er komt een pop-up als de gebruiker naar een `slide` wil gaan die niet bestaat.
 
@@ -211,6 +231,12 @@ Verder is het in JabberPoint mogelijk te navigeren naar een slide die helemaal n
 if (pageNumber < 1 || pageNumber > projector.getPresentation().getSize()) {
 ```
 
-### SlideItem
+# SlideItem
 
 Op een `slide` kunnen verschillende `items` staan. Hiervoor wordt gebruik gemaakt van de abstracte class `SlideItem`. Deze wordt geïmplementeerd door `BitmapItem` en `TextItem`. Ik vind dat dit eigenlijk wel mooi gedaan op deze manier, dit laat ik dus zo.
+
+Nu van elke class de huidig en gerefactorde situatie gedocumenteerd is, is het mogelijk om een totaal diagram te geven waarin alles samenkomt. Merk op dat er kleuren zijn toegevoegd om aan classen de groeperen.
+
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/huidig.png?raw=true)
+
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/Refactor.png?raw=true)
