@@ -34,17 +34,17 @@ In figuur *uc* vind men het use-case diagram.
 
 Er zijn meerdere activity diagrammen opgesteld. Namelijk een voor elke activiteit die kan worden uitgevoerd in Jabberpoint. Deze staan hieronder in figuren *act 1 t/m 8*.
 
-![](file://C:\Users\daniel.roosken\AppData\Roaming\marktext\images\2024-04-18-16-02-34-image.png?msec=1713644044991)
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-16-02-34-image.png?raw=true)
 
-![](file://C:\Users\daniel.roosken\AppData\Roaming\marktext\images\2024-04-18-16-02-56-image.png?msec=1713644044992)
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-16-02-56-image.png?raw=true)
 
-![](file://C:\Users\daniel.roosken\AppData\Roaming\marktext\images\2024-04-18-16-03-04-image.png?msec=1713644044992)
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-16-03-11-image.png?raw=true)
 
-![](file://C:\Users\daniel.roosken\AppData\Roaming\marktext\images\2024-04-18-16-03-11-image.png?msec=1713644044992)
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-16-03-19-image.png?raw=true)
 
-![](file://C:\Users\daniel.roosken\AppData\Roaming\marktext\images\2024-04-18-16-03-19-image.png?msec=1713644044992)
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-16-03-26-image.png?raw=true)
 
-![](file://C:\Users\daniel.roosken\AppData\Roaming\marktext\images\2024-04-18-16-03-26-image.png?msec=1713644044992)
+![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-16-03-36-image.png?raw=true)
 
 ![](file://C:\Users\daniel.roosken\AppData\Roaming\marktext\images\2024-04-18-16-03-36-image.png?msec=1713644044992)
 
