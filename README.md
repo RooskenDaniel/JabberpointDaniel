@@ -28,7 +28,7 @@ Voor deel 1 moeten een drietal diagrammen aangeleverd worden. Dit zijn, volgens 
 
 In figuur *uc* vind men het use-case diagram.
 
-![](file://C:\Users\daniel.roosken\AppData\Roaming\marktext\images\2024-04-18-15-56-57-image.png?msec=1713644044991)
+![](file://https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/2024-04-18-15-56-57-image.png)
 
 ### Activity diagram
 
