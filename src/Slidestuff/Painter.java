@@ -1,3 +1,7 @@
+package Slidestuff;
+
+import Presentationstuff.Projector;
+
 import javax.swing.*;
 import java.util.Observable;
 import java.util.Observer;

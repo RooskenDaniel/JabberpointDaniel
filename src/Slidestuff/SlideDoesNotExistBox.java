@@ -1,3 +1,5 @@
+package Slidestuff;
+
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 
@@ -15,7 +17,7 @@ public class SlideDoesNotExistBox {
     public static void show(Frame parent) {
         JOptionPane.showMessageDialog(parent,
                 "This slide doesn't exist!",
-                "Slide Doesn't Exist",
+                "Press.Slide Doesn't Exist",
                 JOptionPane.INFORMATION_MESSAGE
         );
     }

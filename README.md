@@ -69,22 +69,22 @@ protected static final String JABVERSION = "Jabberpoint 1.6 - OU version";
 Hier worden drie strings aangemaakt, die zijn verder niet zo heel belangrijk.
 
 ```java
-Style.createStyles();
+Stylestuff.Style.createStyles();
 ```
 
-Hier worden de `styles` aangemaakt op een statische manier. Dit is waarschijnlijk niet de beste manier. Later wordt verder naar gekeken in `Style`.
+Hier worden de `styles` aangemaakt op een statische manier. Dit is waarschijnlijk niet de beste manier. Later wordt verder naar gekeken in `Stylestuff.Style`.
 
 ```java
-Presentation presentation = new Presentation();
+Presentationstuff.Presentation presentation = new Presentationstuff.Presentation();
 ```
 
 Een nieuwe lege presentatie wordt aangemaakt.
 
 ```java
-new SlideViewerFrame(JABVERSION, presentation);
+new Slidestuff.SlideViewerFrame(JABVERSION, presentation);
 ```
 
-Een `SlideViewerFrame` wordt aangemaakt die als input de nieuwe lege `presentation` heeft.
+Een `Slidestuff.SlideViewerFrame` wordt aangemaakt die als input de nieuwe lege `presentation` heeft.
 
 Hierna volgt een `try-catch`. De `catch` spreekt voor zich, dit is natuurlijk een error. Daarom wordt alleen de `try` hier verder toegelicht.
 
@@ -101,11 +101,11 @@ Verder de `getDemoAccessor().loadFile(presentation,"")`, hier wordt een functie 
 
 ```java
 else {
-    new XMLAccessor().loadFile(presentation, argv[0]);
+    new Slidestuff.XMLAccessor().loadFile(presentation, argv[0]);
 }
 ```
 
-Als er een argument is meegegeven bij het openen van Jabberpoint. Wordt geprobeerd dit argument te openen via de `XMLAccessor().loadFile`.
+Als er een argument is meegegeven bij het openen van Jabberpoint. Wordt geprobeerd dit argument te openen via de `Slidestuff.XMLAccessor().loadFile`.
 
 ```java
 presentation.setSlideNumber(0);
@@ -121,73 +121,83 @@ Dit was de `JabberPoint`class. Wat gelijk al opvalt is dat er erg veel in de mai
 
 Er zal nu verder verdiept worden, de classes die in `JabberPoint` worden aangeroepen worden ook beschreven. Dit wordt weer chronologisch gedaan, op volgerde waarin deze classes voorkomen in `JabberPoint`.
 
-# Style
+# Stylestuff.Style
 
 ```java
 public static void createStyles() {
-    styles = new Style[5];    
+    styles = new Stylestuff.Style[5];    
     // De styles zijn vast ingecodeerd.
-    styles[0] = new Style(0, Color.red,   48, 20);    // style voor item-level 0
-    styles[1] = new Style(20, Color.blue,  40, 10);    // style voor item-level 1
-    styles[2] = new Style(50, Color.black, 36, 10);    // style voor item-level 2
-    styles[3] = new Style(70, Color.black, 30, 10);    // style voor item-level 3
-    styles[4] = new Style(90, Color.black, 24, 10);    // style voor item-level 4
+    styles[0] = new Stylestuff.Style(0, Color.red,   48, 20);    // style voor item-level 0
+    styles[1] = new Stylestuff.Style(20, Color.blue,  40, 10);    // style voor item-level 1
+    styles[2] = new Stylestuff.Style(50, Color.black, 36, 10);    // style voor item-level 2
+    styles[3] = new Stylestuff.Style(70, Color.black, 30, 10);    // style voor item-level 3
+    styles[4] = new Stylestuff.Style(90, Color.black, 24, 10);    // style voor item-level 4
 }
 ```
 
-Hier gebeurt iets heel raars. Er worden namelijk `styles` aangemaakt in de class `Style`. Een `Style` bevat dus zowel stijlelementen (kleur, lettertype etc.) als ook een verzameling `styles`. Om er voor te zorgen dat dit niet een *invinity* in elkaar *genest* zitten, is de verzameling `styles` op een statische manier gemaakt. Dit werkt welleswaar, maar is niet volgens *best practises*. Een class moet alleen doen wat een class moet doen. Een `style` moet dus alleen stijlelementen bijhouden. De verzameling `styles` moet ergens anders worden bijgehouden. Hiervoor ga ik een nieuwe class maken genaamd `Theme`. Mijn idee is dat een `style` de stijling van een component is, terwijl een `theme` de stijling van het het programma is. Ofwel een verzameling `styles`. Hiervoor gebruik ik het [Singleton pattern](https://refactoring.guru/design-patterns/singleton). Dit zorgt ervoor dat er slecht een instantie van `Theme` bestaat.
+Hier gebeurt iets heel raars. Er worden namelijk `styles` aangemaakt in de class `Stylestuff.Style`. Een `Stylestuff.Style` bevat dus zowel stijlelementen (kleur, lettertype etc.) als ook een verzameling `styles`. Om er voor te zorgen dat dit niet een *invinity* in elkaar *genest* zitten, is de verzameling `styles` op een statische manier gemaakt. Dit werkt welleswaar, maar is niet volgens *best practises*. Een class moet alleen doen wat een class moet doen. Een `style` moet dus alleen stijlelementen bijhouden. De verzameling `styles` moet ergens anders worden bijgehouden. Hiervoor ga ik een nieuwe class maken genaamd `Stylestuff.Theme`. Mijn idee is dat een `style` de stijling van een component is, terwijl een `theme` de stijling van het het programma is. Ofwel een verzameling `styles`. Hiervoor gebruik ik het [Singleton pattern](https://refactoring.guru/design-patterns/singleton). Dit zorgt ervoor dat er slecht een instantie van `Stylestuff.Theme` bestaat.
 
 ![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/huidigesituatiestyle.png?raw/true)
 
 ![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/stylegerefactord.png?raw=true)
 
-# Presentation
+# Presentationstuff.Presentation
 
 ```java
-public class Presentation {
-    private String showTitle; //The title of the presentation
-    private ArrayLiest<Slide> showList = null; //An ArrayList with slides
-    private int currentSlideNumber = 0; //The number of the current slide
-    private SlideViewerComponent slideViewComponent = null; //The view component of the slides
+import Slidestuff.SlideViewerComponent;
+import Slidestuff.Slide;
 
-    public Presentation() {
-        slideViewComponent = null;
-        clear();
-    }
+public class Presentation
+{
+  private String showTitle; //The title of the presentation
+  private ArrayLiest<Slide> showList = null; //An ArrayList with slides
+  private int currentSlideNumber = 0; //The number of the current slide
+  private SlideViewerComponent slideViewComponent = null; //The view component of the slides
+
+  public Presentation()
+  {
+    slideViewComponent = null;
+    clear();
+  }
 
     ...
 
-    void clear() {
-        showList = new ArrayList<Slide>();
-        setSlideNumber(-1);
-    }
+  void clear()
+  {
+    showList = new ArrayList<Slide>();
+    setSlideNumber(-1);
+  }
 ```
 
-Dit is hoe een `presentation` wordt aangemaakt in `JabberPoint`. `Presentation` is voor te veel dingen verantwoordelijk. Een `presentation` is in de essentie namelijk gewoon een verzameling `slides`. Zo zou het ook moeten zijn opgebouwd. Dingen als bijhouden op welke `slide` `presentation` is, is niet de verantwoordelijkheid van `presentation`. In de echte wereld zou dit worden gedaan door een projector. Daarom zal ik een class genaamde `Projector` toevoegen die zulke restinformatie over de `presentation` bijhoudt.
+Dit is hoe een `presentation` wordt aangemaakt in `JabberPoint`. `Presentationstuff.Presentation` is voor te veel dingen verantwoordelijk. Een `presentation` is in de essentie namelijk gewoon een verzameling `slides`. Zo zou het ook moeten zijn opgebouwd. Dingen als bijhouden op welke `slide` `presentation` is, is niet de verantwoordelijkheid van `presentation`. In de echte wereld zou dit worden gedaan door een projector. Daarom zal ik een class genaamde `Presentationstuff.Projector` toevoegen die zulke restinformatie over de `presentation` bijhoudt.
 
 ![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/huidigesituatiepresentation.png?raw=true)
 
 ![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/presentationgerefactord.png?raw=true)
 
-# SlideViewerFrame/SlideViewerComponent
+# Slidestuff.SlideViewerFrame/Slidestuff.SlideViewerComponent
 
 ```java
-public class SlideViewerFrame extends JFrame {
-    private static final long serialVersionUID = 3227L;
 
-    private static final String JABTITLE = "Jabberpoint 1.6 - OU";
-    public final static int WIDTH = 1200;
-    public final static int HEIGHT = 800;
 
-    public SlideViewerFrame(String title, Presentation presentation) {
+public class Slidestuff.SlideViewerFrame extends JFrame
+        {
+private static final long serialVersionUID=3227L;
+
+private static final String JABTITLE="Jabberpoint 1.6 - OU";
+public final static int WIDTH=1200;
+public final static int HEIGHT=800;
+
+public Slidestuff.SlideViewerFrame(String title,Presentation presentation)
+        {
         super(title);
-        SlideViewerComponent slideViewerComponent = new SlideViewerComponent(presentation, this);
+        Slidestuff.SlideViewerComponent slideViewerComponent=new Slidestuff.SlideViewerComponent(presentation,this);
         presentation.setShowView(slideViewerComponent);
-        setupWindow(slideViewerComponent, presentation);
-    }
+        setupWindow(slideViewerComponent,presentation);
+        }
 ```
 
-Deze class maakt het `frame` waar alle grafische elementen van het programma zich in bevinden. Op zich is het meeste in deze class vrij simpel en hoeft niet verder gerefactord te worden. Het enige is dat er een `slideViewerComponent` wordt gemaakt, deze *heeft* een `presentation`, maar ook *heeft* een `presentation` een `slideViewerComponent`, zo ontstaat er dus een soort *circelverwijzing*. Dit wil ik oplossen door `slideViewComponent` uit `Presentation` te halen. `SlideViewerComponent` is namelijk de *bovenste* class van de twee, dus die zou een `presentation` moeten *hebben* en niet andersom. De comunicatie tussen beiden loopt dan via een [Observer](https://refactoring.guru/design-patterns/observer). Helaas blijkt het heel lastig om een *observer* in een `JComponent` te bouwen. Dus komt hier een tussenclass tussen die de communicatie regelt. Deze class heet `Painter` omdat het de `repaint()` van `SlideViewerComponent` aanroept.
+Deze class maakt het `frame` waar alle grafische elementen van het programma zich in bevinden. Op zich is het meeste in deze class vrij simpel en hoeft niet verder gerefactord te worden. Het enige is dat er een `slideViewerComponent` wordt gemaakt, deze *heeft* een `presentation`, maar ook *heeft* een `presentation` een `slideViewerComponent`, zo ontstaat er dus een soort *circelverwijzing*. Dit wil ik oplossen door `slideViewComponent` uit `Presentationstuff.Presentation` te halen. `Slidestuff.SlideViewerComponent` is namelijk de *bovenste* class van de twee, dus die zou een `presentation` moeten *hebben* en niet andersom. De comunicatie tussen beiden loopt dan via een [Observer](https://refactoring.guru/design-patterns/observer). Helaas blijkt het heel lastig om een *observer* in een `JComponent` te bouwen. Dus komt hier een tussenclass tussen die de communicatie regelt. Deze class heet `Slidestuff.Painter` omdat het de `repaint()` van `Slidestuff.SlideViewerComponent` aanroept.
 
 ![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/huidigesituatie%20SlideViewerComponent.png?raw=true)
 
@@ -205,7 +215,7 @@ public abstract class Accessor {
     }
 ```
 
-`Accessor` is een abstracte class die twee keer wordt geïmplementeerd. Een keer als `DemoAccessor`. Dit is een gehardcode demo`presentation`. De andere keer is als `XMLAccessor`. Hierin wordt een `presentation` opgebouwd aan de hand van een XML-bestand.
+`Accessor` is een abstracte class die twee keer wordt geïmplementeerd. Een keer als `DemoAccessor`. Dit is een gehardcode demo`presentation`. De andere keer is als `Slidestuff.XMLAccessor`. Hierin wordt een `presentation` opgebouwd aan de hand van een XML-bestand.
 
 Het is raar dat `Accessor.getDemoAccessor()` bestaat. `Accessor` is een abstracte class. Het doel hiervan is om een soort *bouwplan* te zijn. Het is niet de bedoeling om functies direct vanaf hier aan te roepen.
 
@@ -217,9 +227,9 @@ Hardcoden is een *code smell* omdat het de onderhoudbaarheid van de code negatie
 
 Dit waren de classes die in `JabberPoint` worden gebruikt. Er zijn nog meer classes die weer in *deze* classes worden gebruikt. Die zullen hier verder worden uitgelegd.
 
-# Menu
+# menustuff
 
-Een aantal classes zijn verantwoordelijk voor het menu. Dit zijn `AboutBox`, `KeyController` en `MenuController`. Hierin staan twee problemen. Ten eerste is `MenuController` voor zowel de front-end als de back-end verantwoordelijk. Dit is maakt de onderhoudbaarheid lastig. Het is makkelijker als een frontenter en backenter allebei in een eigen bestand kunnen werken. Daarom wordt deze opgesplitst in `MenuLogic` en `MenuView`.
+Een aantal classes zijn verantwoordelijk voor het menu. Dit zijn `menustuff.AboutBox`, `menustuff.KeyController` en `MenuController`. Hierin staan twee problemen. Ten eerste is `MenuController` voor zowel de front-end als de back-end verantwoordelijk. Dit is maakt de onderhoudbaarheid lastig. Het is makkelijker als een frontenter en backenter allebei in een eigen bestand kunnen werken. Daarom wordt deze opgesplitst in `menustuff.MenuLogic` en `menustuff.MenuView`.
 
 ![](https://github.com/RooskenDaniel/JabberpointDaniel/blob/master/images/huidgigesituatiemenu.png?raw=true)
 
@@ -231,9 +241,9 @@ Verder is het in JabberPoint mogelijk te navigeren naar een slide die helemaal n
 if (pageNumber < 1 || pageNumber > projector.getPresentation().getSize()) {
 ```
 
-# SlideItem
+# Slidestuff.SlideItem
 
-Op een `slide` kunnen verschillende `items` staan. Hiervoor wordt gebruik gemaakt van de abstracte class `SlideItem`. Deze wordt geïmplementeerd door `BitmapItem` en `TextItem`. Ik vind dat dit eigenlijk wel mooi gedaan op deze manier, dit laat ik dus zo.
+Op een `slide` kunnen verschillende `items` staan. Hiervoor wordt gebruik gemaakt van de abstracte class `Slidestuff.SlideItem`. Deze wordt geïmplementeerd door `Stylestuff.BitmapItem` en `Stylestuff.TextItem`. Ik vind dat dit eigenlijk wel mooi gedaan op deze manier, dit laat ik dus zo.
 
 Nu van elke class de huidig en gerefactorde situatie gedocumenteerd is, is het mogelijk om een totaal diagram te geven waarin alles samenkomt. Merk op dat er kleuren zijn toegevoegd om aan classen de groeperen.
 

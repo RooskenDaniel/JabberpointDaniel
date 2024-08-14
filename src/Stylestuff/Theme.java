@@ -1,3 +1,5 @@
+package Stylestuff;
+
 import java.awt.*;
 
 public class Theme {

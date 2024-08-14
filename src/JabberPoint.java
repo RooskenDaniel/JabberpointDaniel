@@ -1,3 +1,8 @@
+import Slidestuff.SlideViewerFrame;
+import Slidestuff.XMLAccessor;
+import Presentationstuff.Projector;
+import Stylestuff.Theme;
+
 import javax.swing.JOptionPane;
 import java.io.IOException;
 

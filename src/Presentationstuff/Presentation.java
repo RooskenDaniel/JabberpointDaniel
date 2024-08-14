@@ -1,6 +1,10 @@
+package Presentationstuff;
+
+import Slidestuff.Slide;
+
 import java.util.ArrayList;
 
-// Presentation class only holds slides
+// Press.Presentation class only holds slides
 public class Presentation {
     private ArrayList<Slide> showList = new ArrayList<>(); // An ArrayList with slides
     private String showTitle; // The title of the presentation

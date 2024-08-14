@@ -1,3 +1,10 @@
+package menustuff;
+
+import Presentationstuff.Projector;
+import Slidestuff.SlideDoesNotExistBox;
+import Slidestuff.SlideViewerFrame;
+import Slidestuff.XMLAccessor;
+
 import javax.swing.JOptionPane;
 import java.io.IOException;
 
