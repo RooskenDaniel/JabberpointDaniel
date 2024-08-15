@@ -1,7 +1,9 @@
 import Slidestuff.SlideViewerFrame;
-import Slidestuff.XMLAccessor;
+import Slidestuff.XMLLoader;
+import Slidestuff.XMLSaver;
 import Presentationstuff.Projector;
 import Stylestuff.Theme;
+import menustuff.GetHardcodedData;
 
 import javax.swing.JOptionPane;
 import java.io.IOException;
@@ -27,9 +29,9 @@ public class JabberPoint {
     private void loadPresentation(Projector projector, String[] argv) {
         try {
             if (argv.length == 0) { //a demo presentation
-                new XMLAccessor().loadFile(projector, "demoPresentation.xml");
+                new XMLLoader().loadFile(projector, GetHardcodedData.getData("openingFileName"));
             } else {
-                new XMLAccessor().loadFile(projector, argv[0]);
+                new XMLLoader().loadFile(projector, argv[0]);
             }
             projector.setSlideNumber(0);
         } catch (IOException ex) {

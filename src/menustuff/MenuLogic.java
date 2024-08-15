@@ -3,7 +3,8 @@ package menustuff;
 import Presentationstuff.Projector;
 import Slidestuff.SlideDoesNotExistBox;
 import Slidestuff.SlideViewerFrame;
-import Slidestuff.XMLAccessor;
+import Slidestuff.XMLLoader;
+import Slidestuff.XMLSaver;
 
 import javax.swing.JOptionPane;
 import java.io.IOException;
@@ -25,9 +26,6 @@ public class MenuLogic {
     protected static final String SAVE = "Save";
     protected static final String VIEW = "View";
 
-    protected static final String TESTFILE = "testPresentation.xml";
-    protected static final String SAVEFILE = "savedPresentation.xml";
-
     protected static final String IOEX = "IO Exception: ";
     protected static final String LOADERR = "Load Error";
     protected static final String SAVEERR = "Save Error";
@@ -42,9 +40,9 @@ public class MenuLogic {
 
     public void openFile() {
         projector.clear();
-        XMLAccessor xmlAccessor = new XMLAccessor();
+        XMLLoader xmlLoader = new XMLLoader();
         try {
-            xmlAccessor.loadFile(projector, TESTFILE);
+            xmlLoader.loadFile(projector, GetHardcodedData.getData("TESTFILE"));
             projector.setSlideNumber(0);
         } catch (IOException exc) {
             JOptionPane.showMessageDialog(parent, IOEX + exc,
@@ -59,9 +57,9 @@ public class MenuLogic {
     }
 
     public void saveFile() {
-        XMLAccessor xmlAccessor = new XMLAccessor();
+        XMLSaver xmlSaver = new XMLSaver();
         try {
-            xmlAccessor.saveFile(projector, SAVEFILE);
+            xmlSaver.saveFile(projector, GetHardcodedData.getData("SAVEFILE"));
         } catch (IOException exc) {
             JOptionPane.showMessageDialog(parent, IOEX + exc,
                     SAVEERR, JOptionPane.ERROR_MESSAGE);
