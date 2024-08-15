@@ -1,4 +1,4 @@
-package menustuff;
+package Menustuff;
 
 import java.awt.Frame;
 import javax.swing.JOptionPane;

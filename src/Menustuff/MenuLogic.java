@@ -1,4 +1,4 @@
-package menustuff;
+package Menustuff;
 
 import Presentationstuff.Projector;
 import Slidestuff.SlideDoesNotExistBox;

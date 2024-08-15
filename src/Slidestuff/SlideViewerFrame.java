@@ -1,9 +1,9 @@
 package Slidestuff;
 
 import Presentationstuff.Projector;
-import menustuff.KeyController;
-import menustuff.MenuController;
-import menustuff.MenuLogic;
+import Menustuff.KeyController;
+import Menustuff.MenuController;
+import Menustuff.MenuLogic;
 
 import java.awt.Dimension;
 import java.awt.event.WindowEvent;

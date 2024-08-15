@@ -12,13 +12,11 @@ public class Projector extends Observable {
 
     public Projector(Presentation presentation/*, Menu.SlideViewerComponent slideViewComponent*/) {
         this.presentation = presentation;
-        //this.slideViewComponent = slideViewComponent;
     }
 
     public Projector()
     {
         this.presentation = new Presentation();
-        //slideViewComponent = null;
     }
 
     // Navigate to the previous slide
@@ -40,9 +38,6 @@ public class Projector extends Observable {
     // Show the current slide
     public void showCurrentSlide() {
         Slide currentSlide = presentation.getSlide(currentSlideNumber);
-        /*if (slideViewComponent != null && currentSlide != null) {
-            slideViewComponent.update(this, currentSlide);
-        }*/
         setChanged();
         notifyObservers(currentSlide);
     }

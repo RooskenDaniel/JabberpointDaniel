@@ -22,13 +22,11 @@ public class Painter implements Observer {
     public void update(Observable o, Object arg) {
         Slide data = (Slide) arg;
         if (data == null) {
-            //repaint();
             return;
         }
         Projector projector = (Projector) o;
         slideViewerComponent.setProjector(projector);
         slideViewerComponent.setSlide(data);
         slideViewerComponent.repaint();
-        //frame.setTitle(projector.getPresentation().getTitle());
     }
 }

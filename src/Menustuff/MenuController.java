@@ -1,4 +1,4 @@
-package menustuff;
+package Menustuff;
 
 import Presentationstuff.Projector;
 import Slidestuff.SlideViewerFrame;
@@ -6,7 +6,7 @@ import Slidestuff.SlideViewerFrame;
 import java.awt.MenuBar;
 import java.awt.Frame;
 
-import static menustuff.MenuAttributes.*;
+
 
 
 /**
@@ -16,14 +16,11 @@ import static menustuff.MenuAttributes.*;
  * @version 1.6 2014/05/16 Sylvia Stuurman
  */
 public class MenuController extends MenuBar {
-    public static final String TESTFILE = "testPresentation.xml";
-    public static final String SAVEFILE = "savedPresentation.xml";
-
     private static final long serialVersionUID = 227L;
 
     public MenuController(Frame parent, Projector projector) {
-        add(MenuFactory.CreateMenu(FILE, (SlideViewerFrame) parent, projector));
-        add(MenuFactory.CreateMenu(VIEW, (SlideViewerFrame) parent, projector));
-        setHelpMenu(MenuFactory.CreateMenu(HELP, (SlideViewerFrame) parent, projector));
+        add(MenuFactory.CreateMenu("File", (SlideViewerFrame) parent, projector));
+        add(MenuFactory.CreateMenu("View", (SlideViewerFrame) parent, projector));
+        setHelpMenu(MenuFactory.CreateMenu("Help", (SlideViewerFrame) parent, projector));
     }
 }

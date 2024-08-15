@@ -1,9 +1,8 @@
 import Slidestuff.SlideViewerFrame;
 import Slidestuff.XMLLoader;
-import Slidestuff.XMLSaver;
 import Presentationstuff.Projector;
 import Stylestuff.Theme;
-import menustuff.GetHardcodedData;
+import Menustuff.GetHardcodedData;
 
 import javax.swing.JOptionPane;
 import java.io.IOException;
