@@ -90,6 +90,10 @@ Wat nog meer opvalt is dat er meerdere instanties van `Menu` worden aangemaakt, 
 
 Verder is het in JabberPoint mogelijk te navigeren naar een slide die helemaal niet bestaat. Dan vertoond het programma vreemd gedrag. Tijdens refactoren is het niet de bedoeling functionaliteiten toe te voegen, maar dit is eerder het oplossen van een bug dan een functionaliteit. Er komt een pop-up als de gebruiker naar een `slide` wil gaan die niet bestaat.
 
+Ook valt op dat een aander vars gehardcode zijn. Dit zijn de naam van de presentatie die wordt geopent bij het opstarten, de naam van de presentatie die wordt geopent via het menu en hoe een presentatie moet heten als deze wordt opgeslagen. Ik heb ervoor gekozen om deze vars in een apart class te zetten genaamde `GetHardcodedData` dit vergroot de onderhoudbaarheid; als een gebruiker één van deze waarden wil aanpassen hoeft hij niet diep in de code te duiken maar kan alles overzichtelijk vinden in `GethardcodedData`. Dit kan merchconflicts voorkomen op een productielijn, de namen van persoonlijke prenestatie's hoeven niet te worden gecommit. Deze class kan op een productielijn dus in de `gitingore` worden gezet. Zo kan iedere gebruiker zelf bepalen welke presantaties die wil openen/opslaan zonder dat dit de overige code in de war gooit.
+
+Ook voegt dit iets toe aan de toekomstbestendigheid. In concurerende diapresentatieprogramma's is het mogelijk om presentatie's te selecteren door middel van een grafische interface. Als de ontwikkelaars van Jabberpoint dit ook willen toevoegen, kan `GetHardcodedData` gemakkelijk worden uitgebreid om een GUI weer te geven in plaats van hardcoded data te gebruiken.
+
 ## Diagram
 
 Nu van elke class de huidig en gerefactorde situatie gedocumenteerd is, is het mogelijk om een totaal diagram te geven waarin alles samenkomt.
